@@ -1,0 +1,134 @@
+TOURIST SPOT
+
+<script>
+    $('#add_spot_division').on('change',function(e){
+    console.log(e);
+   
+    var division_name=e.target.value;
+    //$('#accommodation_district').empty();
+    $('#add_spot_district').empty();
+    $('#add_spot_upazilla').empty();
+    
+    $('#add_spot_district').append($('<option>', {
+	value: "Any",
+	text: 'Any'
+    }));
+    $('#add_spot_upazilla').append($('<option>', {
+	value: "Any",
+	text: 'Any'
+    }));
+   
+    //$('#accommodation_upazilla').empty();
+    $.getJSON('ajax_district?division_name='+division_name,function(data){
+	 //console.log(data);
+	
+	$.each(data ,function(index,district_object){
+	   
+	   $('#add_spot_district').append('<option value="'+district_object.DISTRICT_NAME+'">'+district_object.DISTRICT_NAME+'</option>');
+	   
+	});
+	
+    });
+});
+</script>
+<script>
+$('#add_spot_district').on('change',function(e){
+    console.log(e);
+   
+    var district_name=e.target.value;
+    //$('#accommodation_district').empty();
+    $.getJSON('ajax_upazilla?district_name='+district_name,function(data){
+	 //console.log(data);
+	$('#add_spot_upazilla').empty();
+	$('#add_spot_upazilla').append('<option value="'+"Any"+'">'+"Any"+'</option>');
+	$.each(data ,function(index,upazilla_object){
+	   
+	   $('#add_spot_upazilla').append('<option value="'+upazilla_object.UPAZILLA_NAME+'">'+upazilla_object.UPAZILLA_NAME+'</option>');
+	   
+	});
+	
+    });
+});
+</script>
+<script>
+$('#add_spot_upazilla').on('change',function(e){
+    console.log(e);
+   
+    var upazilla_name=e.target.value;
+    //$('#accommodation_district').empty();
+    $.getJSON('ajax_tourist_spot?upazilla_name='+upazilla_name,function(data){
+	 //console.log(data);
+	$('#add_spot').empty();
+	$('#add_spot').append('<option value="'+"Any"+'">'+"Any"+'</option>');
+	$.each(data ,function(index,spot_object){
+	   
+	   $('#add_spot').append('<option value="'+spot_object.SPOT_NAME+'">'+spot_object.SPOT_NAME+'</option>');
+	   
+	});
+	
+    });
+});
+</script>
+<script>
+$('#add_spot').on('change',function(e){
+    console.log(e);
+   
+    var spot=e.target.value;
+    //$('#accommodation_district').empty();
+    document.getElementById('spot_name').value=spot;
+    
+});
+</script>
+
+ACCOMMODATION
+
+<script>
+    $('#accommodation_division').on('change',function(e){
+    console.log(e);
+   
+    var division_name=e.target.value;
+    //$('#accommodation_district').empty();
+    $('#accommodation_district').empty();
+    $('#accommodation_upazilla').empty();
+    
+    $('#accommodation_district').append($('<option>', {
+	value: "Any",
+	text: 'Any'
+    }));
+    $('#accommodation_upazilla').append($('<option>', {
+	value: "Any",
+	text: 'Any'
+    }));
+   
+    //$('#accommodation_upazilla').empty();
+    $.getJSON('ajax_district?division_name='+division_name,function(data){
+	 //console.log(data);
+	
+	$.each(data ,function(index,district_object){
+	   
+	   $('#accommodation_district').append('<option value="'+district_object.DISTRICT_NAME+'">'+district_object.DISTRICT_NAME+'</option>');
+	   
+	});
+	
+    });
+});
+</script>
+<script>
+$('#accommodation_district').on('change',function(e){
+    console.log(e);
+   
+    var district_name=e.target.value;
+    //$('#accommodation_district').empty();
+    $.getJSON('ajax_upazilla?district_name='+district_name,function(data){
+	 //console.log(data);
+	$('#accommodation_upazilla').empty();
+	$('#accommodation_upazilla').append('<option value="'+"Any"+'">'+"Any"+'</option>');
+	$.each(data ,function(index,upazilla_object){
+	   
+	   $('#accommodation_upazilla').append('<option value="'+upazilla_object.UPAZILLA_NAME+'">'+upazilla_object.UPAZILLA_NAME+'</option>');
+	   
+	});
+	
+    });
+});
+</script>
